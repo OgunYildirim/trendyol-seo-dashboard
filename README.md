@@ -198,11 +198,8 @@ Trendyol-Dashboard-Pro/
 
 ### 💬 Destek Kanalları
 
-- **Email Destek:** support@trendyoldashboard.com
+- **Email Destek:** ogun.271010@gmail.com
 - **Canlı Chat:** Dashboard içinden
-- **Video Eğitimler:** YouTube kanalımız
-- **Topluluk:** Discord sunucumuz
-
 ---
 
 ## 💰 Fiyatlandırma
@@ -288,20 +285,7 @@ Trendyol-Dashboard-Pro/
 
 ---
 
-## 📞 İletişim
 
-**Web:** www.trendyoldashboard.com  
-**Email:** info@trendyoldashboard.com  
-**Telefon:** +90 (212) XXX XX XX  
-**Adres:** İstanbul, Türkiye
-
-**Sosyal Medya:**
-- Twitter: @TrendyolDash
-- LinkedIn: /company/trendyol-dashboard
-- Instagram: @trendyoldashboard
-- YouTube: /TrendyolDashboard
-
----
 
 ## 📄 Lisans
 
