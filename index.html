@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendyol Algoritma Optimizasyon Dashboard - Pro</title>
+    <meta name="description" content="Profesyonel e-ticaret algoritma optimizasyonu ve veri analizi platformu">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">📊</div>
+                    <div>
+                        <h1 class="logo-title">Trendyol Algoritma Dashboard</h1>
+                        <p class="logo-subtitle">E-Ticaret Optimizasyon Merkezi • Pro Edition</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="revenue-display">
+                        <span class="revenue-label">Tahmini Aylık Gelir Artışı</span>
+                        <span class="revenue-value" id="revenueIncrease">+47,850 TL</span>
+                    </div>
+                    <button class="btn-primary" id="refreshBtn">
+                        <span class="btn-icon">🔄</span>
+                        Verileri Yenile
+                    </button>
+                    <button class="btn-secondary" id="resetBtn" style="margin-left: 0.5rem;">
+                        <span class="btn-icon">🗑️</span>
+                        Sıfırla
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Live Notifications -->
+    <div class="live-notifications" id="liveNotifications"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Stats Overview -->
+            <section class="stats-overview">
+                <div class="stats-header">
+                    <h2 class="section-title">
+                        <span class="title-icon">🎯</span>
+                        Performans Özeti
+                    </h2>
+                    <div class="date-range">
+                        <span class="date-label">Son 30 Gün</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-header">
+                            <span class="stat-icon">💰</span>
+                            <span class="stat-trend trend-up">+127%</span>
+                        </div>
+                        <div class="stat-value" id="totalRevenue">₺142,580</div>
+                        <div class="stat-label">Toplam Gelir</div>
+                        <div class="stat-change">+₺79,340 geçen aya göre</div>
+                    </div>
+
+                    <div class="stat-card stat-success">
+                        <div class="stat-header">
+                            <span class="stat-icon">📦</span>
+                            <span class="stat-trend trend-up">+89%</span>
+                        </div>
+                        <div class="stat-value" id="totalOrders">1,247</div>
+                        <div class="stat-label">Toplam Sipariş</div>
+                        <div class="stat-change">+587 sipariş artış</div>
+                    </div>
+
+                    <div class="stat-card stat-warning">
+                        <div class="stat-header">
+                            <span class="stat-icon">👁️</span>
+                            <span class="stat-trend trend-up">+156%</span>
+                        </div>
+                        <div class="stat-value" id="totalViews">45,892</div>
+                        <div class="stat-label">Ürün Görüntüleme</div>
+                        <div class="stat-change">+27,956 görüntüleme</div>
+                    </div>
+
+                    <div class="stat-card stat-info">
+                        <div class="stat-header">
+                            <span class="stat-icon">⭐</span>
+                            <span class="stat-trend trend-up">+0.8</span>
+                        </div>
+                        <div class="stat-value" id="avgRating">4.7</div>
+                        <div class="stat-label">Ortalama Puan</div>
+                        <div class="stat-change">892 yeni yorum</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KPI Cards -->
+            <section class="kpi-section">
+                <h2 class="section-title">
+                    <span class="title-icon">📈</span>
+                    Kritik Performans Metrikleri (KPI)
+                </h2>
+                <div class="kpi-grid">
+                    <!-- CR Card -->
+                    <div class="kpi-card kpi-card-primary">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">📈</span>
+                            <span class="kpi-label">Dönüşüm Oranı (CR)</span>
+                        </div>
+                        <div class="kpi-value-wrapper">
+                            <div class="kpi-value" id="crValue">3.2%</div>
+                            <div class="kpi-badge badge-success">Hedef Aşıldı! 🎉</div>
+                        </div>
+                        <div class="kpi-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 91%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>Mevcut: 3.2%</span>
+                                <span>Hedef: 3.5%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-comparison">
+                            <div class="comparison-item">
+                                <span class="comparison-label">Sektör Ort.</span>
+                                <span class="comparison-value">2.1%</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Fark</span>
+                                <span class="comparison-value text-success">+52%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-trend trend-up">
+                            <span class="trend-icon">↗</span>
+                            <span>+1.4% son 30 günde</span>
+                        </div>
+                    </div>
+
+                    <!-- Seller Score Card -->
+                    <div class="kpi-card kpi-card-success">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">⭐</span>
+                            <span class="kpi-label">Satıcı Puanı</span>
+                        </div>
+                        <div class="kpi-value-wrapper">
+                            <div class="kpi-value" id="sellerScore">9.3</div>
+                            <div class="kpi-badge badge-success">Mükemmel</div>
+                        </div>
+                        <div class="kpi-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-fill-success" style="width: 93%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>Mevcut: 9.3/10</span>
+                                <span>Hedef: 9.5/10</span>
+                            </div>
+                        </div>
+                        <div class="kpi-comparison">
+                            <div class="comparison-item">
+                                <span class="comparison-label">Sektör Ort.</span>
+                                <span class="comparison-value">8.6</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Fark</span>
+                                <span class="comparison-value text-success">+8%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-trend trend-up">
+                            <span class="trend-icon">↗</span>
+                            <span>+0.6 puan bu ay</span>
+                        </div>
+                    </div>
+
+                    <!-- CTR Card -->
+                    <div class="kpi-card kpi-card-warning">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">👆</span>
+                            <span class="kpi-label">Tıklama Oranı (CTR)</span>
+                        </div>
+                        <div class="kpi-value-wrapper">
+                            <div class="kpi-value" id="ctrValue">2.1%</div>
+                            <div class="kpi-badge badge-warning">İyi Gidiyor</div>
+                        </div>
+                        <div class="kpi-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-fill-warning" style="width: 95%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>Mevcut: 2.1%</span>
+                                <span>Hedef: 2.2%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-comparison">
+                            <div class="comparison-item">
+                                <span class="comparison-label">Sektör Ort.</span>
+                                <span class="comparison-value">1.4%</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">Fark</span>
+                                <span class="comparison-value text-success">+50%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-trend trend-up">
+                            <span class="trend-icon">↗</span>
+                            <span>+0.7% bu hafta</span>
+                        </div>
+                    </div>
+
+                    <!-- Ranking Card -->
+                    <div class="kpi-card kpi-card-info">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">🏆</span>
+                            <span class="kpi-label">Arama Sıralaması</span>
+                        </div>
+                        <div class="kpi-value-wrapper">
+                            <div class="kpi-value" id="rankValue">#12</div>
+                            <div class="kpi-badge badge-success">Top 20'de!</div>
+                        </div>
+                        <div class="kpi-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-fill-info" style="width: 88%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>Mevcut: #12</span>
+                                <span>Hedef: Top 10</span>
+                            </div>
+                        </div>
+                        <div class="kpi-comparison">
+                            <div class="comparison-item">
+                                <span class="comparison-label">Başlangıç</span>
+                                <span class="comparison-value">#58</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span class="comparison-label">İlerleme</span>
+                                <span class="comparison-value text-success">+46 sıra</span>
+                            </div>
+                        </div>
+                        <div class="kpi-trend trend-up">
+                            <span class="trend-icon">↗</span>
+                            <span>+23 sıra bu hafta</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <!-- Performance Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">
+                                <span class="chart-icon">📊</span>
+                                Performans Trendi (Son 30 Gün)
+                            </h3>
+                            <div class="chart-legend">
+                                <span class="legend-item legend-primary">Dönüşüm Oranı</span>
+                                <span class="legend-item legend-success">Satıcı Puanı</span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Revenue Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">
+                                <span class="chart-icon">💰</span>
+                                Gelir Analizi (Haftalık)
+                            </h3>
+                            <div class="chart-legend">
+                                <span class="legend-item legend-warning">Gelir</span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Performance -->
+            <section class="product-section">
+                <h2 class="section-title">
+                    <span class="title-icon">🏅</span>
+                    En İyi Performans Gösteren Ürünler
+                </h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-rank">#1</div>
+                        <div class="product-image">
+                            <div class="product-placeholder">👕</div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">Premium Kadın Tayt | Yüksek Bel</h4>
+                            <div class="product-stats">
+                                <div class="product-stat">
+                                    <span class="stat-label">CR:</span>
+                                    <span class="stat-value text-success">4.2%</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Satış:</span>
+                                    <span class="stat-value">487</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Gelir:</span>
+                                    <span class="stat-value">₺48,700</span>
+                                </div>
+                            </div>
+                            <div class="product-trend">
+                                <span class="trend-badge trend-up">↗ +142% bu ay</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-rank">#2</div>
+                        <div class="product-image">
+                            <div class="product-placeholder">👟</div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">Erkek Spor Ayakkabı | Hafif</h4>
+                            <div class="product-stats">
+                                <div class="product-stat">
+                                    <span class="stat-label">CR:</span>
+                                    <span class="stat-value text-success">3.8%</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Satış:</span>
+                                    <span class="stat-value">342</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Gelir:</span>
+                                    <span class="stat-value">₺41,040</span>
+                                </div>
+                            </div>
+                            <div class="product-trend">
+                                <span class="trend-badge trend-up">↗ +98% bu ay</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-rank">#3</div>
+                        <div class="product-image">
+                            <div class="product-placeholder">👜</div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">Kadın Deri Çanta | Siyah</h4>
+                            <div class="product-stats">
+                                <div class="product-stat">
+                                    <span class="stat-label">CR:</span>
+                                    <span class="stat-value text-warning">2.9%</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Satış:</span>
+                                    <span class="stat-value">218</span>
+                                </div>
+                                <div class="product-stat">
+                                    <span class="stat-label">Gelir:</span>
+                                    <span class="stat-value">₺32,700</span>
+                                </div>
+                            </div>
+                            <div class="product-trend">
+                                <span class="trend-badge trend-up">↗ +67% bu ay</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Competitor Analysis -->
+            <section class="competitor-section">
+                <h2 class="section-title">
+                    <span class="title-icon">🎯</span>
+                    Rakip Analizi
+                </h2>
+                <div class="competitor-grid">
+                    <div class="competitor-card">
+                        <div class="competitor-header">
+                            <div class="competitor-name">Sizin Mağazanız</div>
+                            <div class="competitor-badge badge-success">Lider</div>
+                        </div>
+                        <div class="competitor-stats">
+                            <div class="competitor-stat">
+                                <span class="stat-label">Ortalama Fiyat</span>
+                                <span class="stat-value">₺97.99</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Satıcı Puanı</span>
+                                <span class="stat-value text-success">9.3</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Aylık Satış</span>
+                                <span class="stat-value">1,247</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Sıralama</span>
+                                <span class="stat-value text-success">#12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="competitor-card">
+                        <div class="competitor-header">
+                            <div class="competitor-name">Rakip A</div>
+                            <div class="competitor-badge badge-warning">Takipte</div>
+                        </div>
+                        <div class="competitor-stats">
+                            <div class="competitor-stat">
+                                <span class="stat-label">Ortalama Fiyat</span>
+                                <span class="stat-value">₺105.00</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Satıcı Puanı</span>
+                                <span class="stat-value">8.9</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Aylık Satış</span>
+                                <span class="stat-value">892</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Sıralama</span>
+                                <span class="stat-value">#18</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="competitor-card">
+                        <div class="competitor-header">
+                            <div class="competitor-name">Rakip B</div>
+                            <div class="competitor-badge badge-info">İzleniyor</div>
+                        </div>
+                        <div class="competitor-stats">
+                            <div class="competitor-stat">
+                                <span class="stat-label">Ortalama Fiyat</span>
+                                <span class="stat-value">₺89.90</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Satıcı Puanı</span>
+                                <span class="stat-value">8.7</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Aylık Satış</span>
+                                <span class="stat-value">745</span>
+                            </div>
+                            <div class="competitor-stat">
+                                <span class="stat-label">Sıralama</span>
+                                <span class="stat-value">#24</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- A/B Testing -->
+            <section class="testing-section">
+                <h2 class="section-title">
+                    <span class="title-icon">🧪</span>
+                    Aktif A/B Testleri
+                </h2>
+                <div class="test-grid">
+                    <div class="test-card test-active">
+                        <div class="test-header">
+                            <div class="test-info">
+                                <span class="test-name">Başlık Optimizasyonu</span>
+                                <span class="test-duration">Gün 6/7 • Bitiyor</span>
+                            </div>
+                            <span class="test-status status-active">Aktif</span>
+                        </div>
+                        <div class="test-progress">
+                            <div class="test-progress-bar" style="width: 86%"></div>
+                        </div>
+                        <div class="test-results">
+                            <div class="test-variant">
+                                <div class="variant-header">
+                                    <span class="variant-label">Varyant A (Kontrol)</span>
+                                    <span class="variant-traffic">50% trafik</span>
+                                </div>
+                                <div class="variant-metrics">
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CTR:</span>
+                                        <span class="metric-value">1.4%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CR:</span>
+                                        <span class="metric-value">2.8%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">Dönüşüm:</span>
+                                        <span class="metric-value">142</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-variant test-winner">
+                                <div class="variant-header">
+                                    <span class="variant-label">Varyant B (Test) 🏆</span>
+                                    <span class="variant-traffic">50% trafik</span>
+                                </div>
+                                <div class="variant-metrics">
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CTR:</span>
+                                        <span class="metric-value text-success">2.1%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CR:</span>
+                                        <span class="metric-value text-success">3.4%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">Dönüşüm:</span>
+                                        <span class="metric-value text-success">187</span>
+                                    </div>
+                                </div>
+                                <div class="variant-improvement">
+                                    <span class="improvement-badge">+50% CTR • +21% CR • İstatistiksel olarak anlamlı (p
+                                        <0.05)< /span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="test-action">
+                            <button class="btn-success">Kazanan Varyantı Uygula</button>
+                        </div>
+                    </div>
+
+                    <div class="test-card test-active">
+                        <div class="test-header">
+                            <div class="test-info">
+                                <span class="test-name">Fiyat Optimizasyonu</span>
+                                <span class="test-duration">Gün 3/7 • Devam Ediyor</span>
+                            </div>
+                            <span class="test-status status-active">Aktif</span>
+                        </div>
+                        <div class="test-progress">
+                            <div class="test-progress-bar" style="width: 43%"></div>
+                        </div>
+                        <div class="test-results">
+                            <div class="test-variant">
+                                <div class="variant-header">
+                                    <span class="variant-label">₺99.90 (Mevcut)</span>
+                                    <span class="variant-traffic">50% trafik</span>
+                                </div>
+                                <div class="variant-metrics">
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CR:</span>
+                                        <span class="metric-value">3.1%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">Gelir:</span>
+                                        <span class="metric-value">₺18,580</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-variant">
+                                <div class="variant-header">
+                                    <span class="variant-label">₺97.99 (Test)</span>
+                                    <span class="variant-traffic">50% trafik</span>
+                                </div>
+                                <div class="variant-metrics">
+                                    <div class="variant-metric">
+                                        <span class="metric-label">CR:</span>
+                                        <span class="metric-value text-success">3.6%</span>
+                                    </div>
+                                    <div class="variant-metric">
+                                        <span class="metric-label">Gelir:</span>
+                                        <span class="metric-value text-success">₺21,240</span>
+                                    </div>
+                                </div>
+                                <div class="variant-improvement">
+                                    <span class="improvement-badge">+16% CR • +14% Gelir • Henüz erken</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="test-action">
+                            <button class="btn-secondary">4 Gün Daha Bekle</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="actions-section">
+                <h2 class="section-title">
+                    <span class="title-icon">⚡</span>
+                    Hızlı Aksiyonlar
+                </h2>
+
+                <div class="actions-grid">
+                    <button class="action-card action-primary">
+                        <span class="action-icon">📝</span>
+                        <span class="action-title">Yeni Ürün Ekle</span>
+                        <span class="action-desc">Optimizasyon ile başlat</span>
+                    </button>
+
+                    <button class="action-card action-success">
+                        <span class="action-icon">🧪</span>
+                        <span class="action-title">A/B Test Başlat</span>
+                        <span class="action-desc">Yeni test oluştur</span>
+                    </button>
+
+                    <button class="action-card action-warning">
+                        <span class="action-icon">💰</span>
+                        <span class="action-title">Fiyat Analizi</span>
+                        <span class="action-desc">Rakip fiyatlarını gör</span>
+                    </button>
+
+                    <button class="action-card action-info">
+                        <span class="action-icon">📊</span>
+                        <span class="action-title">Detaylı Rapor</span>
+                        <span class="action-desc">PDF olarak indir</span>
+                    </button>
+
+                    <button class="action-card action-secondary">
+                        <span class="action-icon">🎯</span>
+                        <span class="action-title">Hedef Belirle</span>
+                        <span class="action-desc">Yeni KPI tanımla</span>
+                    </button>
+
+                    <button class="action-card action-secondary">
+                        <span class="action-icon">📚</span>
+                        <span class="action-title">Eğitim Merkezi</span>
+                        <span class="action-desc">Stratejileri öğren</span>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">Trendyol Algoritma Dashboard Pro</h4>
+                    <p class="footer-text">
+                        E-ticaret satıcıları için profesyonel algoritma optimizasyon ve veri analizi platformu.
+                        Gerçek zamanlı metrik takibi, A/B testleri ve rakip analizi ile satışlarınızı maksimize edin.
+                    </p>
+                </div>
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <div class="footer-stat-value">+127%</div>
+                        <div class="footer-stat-label">Ortalama Gelir Artışı</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-value">1,247</div>
+                        <div class="footer-stat-label">Aktif Kullanıcı</div>
+                    </div>
+                    <div class="footer-stat">
+                        <div class="footer-stat-value">4.9/5</div>
+                        <div class="footer-stat-label">Müşteri Memnuniyeti</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Trendyol Algoritma Dashboard Pro • Versiyon 2.0 •
+                    <span class="footer-note">Son Güncelleme: <span id="footerDate"></span></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
